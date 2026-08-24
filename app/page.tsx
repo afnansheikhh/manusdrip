@@ -141,10 +141,10 @@ export default function Home() {
         <div className="container" style={{ textAlign: "center", maxWidth: "820px" }}>
           <span className="editorial-caption" style={{ color: "var(--color-brand-red)" }}>LOCAL FLAGSHIP STORE</span>
           <h2 className="section-title" style={{ color: "var(--color-white)", marginTop: "0.5rem", marginBottom: "1.25rem" }}>
-            COMING SOON TO HOSPET
+            NOW OPEN IN HOSPET
           </h2>
           <p style={{ color: "var(--color-gray-300)", fontSize: "1.125rem", lineHeight: "1.8", marginBottom: "2rem" }}>
-            Something new is arriving. A dedicated destination for men's fashion and contemporary streetwear in Hospet. When the first collection drops, browse the catalog online and pick up your pieces directly in store.
+            Visit our flagship destination at Vijay Talkies near Main Bazar to experience our premium heavyweight fabrics, oversized tees, and cargo pants. Select your sizes online and checkout via WhatsApp for immediate store collection or local home delivery.
           </p>
           <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
             <Link href="/contact" className="btn btn-white">STORE DETAILS & LOCATION</Link>
@@ -153,7 +153,7 @@ export default function Home() {
               className="btn btn-outline-white" 
               onClick={() => window.open(waBuyUrl, "_blank")}
             >
-              GET LAUNCH UPDATES
+              ORDER ON WHATSAPP
             </button>
           </div>
         </div>
