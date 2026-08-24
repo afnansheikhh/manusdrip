@@ -60,58 +60,63 @@ export default function EditProduct() {
   }, [products, id]);
 
   // Client-side Image compression helper
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
 
-    const loadedImages: string[] = [];
+    const promises = Array.from(files).map(file => {
+      return new Promise<string | null>((resolve) => {
+        if (!file.type.startsWith("image/")) {
+          return resolve(null);
+        }
 
-    Array.from(files).forEach(file => {
-      if (!file.type.startsWith("image/")) return;
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const img = new Image();
+          img.onload = () => {
+            try {
+              const canvas = document.createElement("canvas");
+              let width = img.width;
+              let height = img.height;
+              const maxSize = 600;
 
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const img = new Image();
-        img.onload = () => {
-          try {
-            const canvas = document.createElement("canvas");
-            let width = img.width;
-            let height = img.height;
-            const maxSize = 600;
-
-            if (width > height) {
-              if (width > maxSize) {
-                height = Math.round((height * maxSize) / width);
-                width = maxSize;
+              if (width > height) {
+                if (width > maxSize) {
+                  height = Math.round((height * maxSize) / width);
+                  width = maxSize;
+                }
+              } else {
+                if (height > maxSize) {
+                  width = Math.round((width * maxSize) / height);
+                  height = maxSize;
+                }
               }
-            } else {
-              if (height > maxSize) {
-                width = Math.round((width * maxSize) / height);
-                height = maxSize;
-              }
+
+              canvas.width = width;
+              canvas.height = height;
+
+              const ctx = canvas.getContext("2d");
+              ctx?.drawImage(img, 0, 0, width, height);
+
+              const compressedBase64 = canvas.toDataURL("image/jpeg", 0.5);
+              resolve(compressedBase64);
+            } catch (err) {
+              console.error("Canvas resizing failed:", err);
+              resolve(event.target?.result as string);
             }
-
-            canvas.width = width;
-            canvas.height = height;
-
-            const ctx = canvas.getContext("2d");
-            ctx?.drawImage(img, 0, 0, width, height);
-
-            const compressedBase64 = canvas.toDataURL("image/jpeg", 0.5);
-            loadedImages.push(compressedBase64);
-            
-            if (loadedImages.length === Array.from(files).filter(f => f.type.startsWith("image/")).length) {
-              setImages(loadedImages);
-            }
-          } catch (err) {
-            console.error("Canvas resizing failed:", err);
-            loadedImages.push(event.target?.result as string);
-          }
+          };
+          img.onerror = () => {
+            resolve(event.target?.result as string);
+          };
+          img.src = event.target?.result as string;
         };
-        img.src = event.target?.result as string;
-      };
-      reader.readAsDataURL(file);
+        reader.onerror = () => resolve(null);
+        reader.readAsDataURL(file);
+      });
     });
+
+    const results = await Promise.all(promises);
+    setImages(results.filter((img): img is string => img !== null));
   };
 
   const handleStockChange = (size: string, value: string) => {
