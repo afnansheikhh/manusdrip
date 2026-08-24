@@ -5,8 +5,17 @@ import { useEffect, useState } from "react";
 import { useStore } from "@/lib/storeContext";
 import ProductCard from "@/components/ProductCard";
 
+const HERO_IMAGES = [
+  "/images/campaign/drip-architectural-mask.jpg",
+  "/images/campaign/drip-chains-perspective.jpg",
+  "/images/campaign/drip-motion-jorts.jpg",
+  "/images/campaign/drip-philosophy-chair.jpg",
+  "/images/campaign/drip-vintage-bike.jpg"
+];
+
 export default function Home() {
   const { products, settings, loading } = useStore();
+  const [heroImage, setHeroImage] = useState("/images/campaign/drip-motion-jorts.jpg");
   const [countdown, setCountdown] = useState({
     days: "07",
     hours: "00",
@@ -14,6 +23,11 @@ export default function Home() {
     seconds: "00",
     isExpired: false
   });
+
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * HERO_IMAGES.length);
+    setHeroImage(HERO_IMAGES[randomIndex]);
+  }, []);
 
   // Calculate Countdown (Synchronized to launch target)
   useEffect(() => {
@@ -65,7 +79,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-bg">
-          <img src="/images/campaign/drip-motion-jorts.jpg" alt="ManusDrip Men's Streetwear Campaign" loading="eager" />
+          <img src={heroImage} alt="ManusDrip Men's Streetwear Campaign" loading="eager" />
         </div>
         <div className="hero-overlay"></div>
         <div className="container">
