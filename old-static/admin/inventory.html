@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventory Management | MANUSDRIP Admin</title>
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="icon" type="image/png" href="../images/logo/logo.png">
+</head>
+<body>
+
+  <div class="admin-wrapper">
+    
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-header">
+        <img src="../images/logo/logo-white.png" alt="ManusDrip Logo" class="sidebar-logo">
+        <span class="sidebar-badge">ADMIN</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="admin-nav-link">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+          </svg>
+          Dashboard
+        </a>
+        <a href="products.html" class="admin-nav-link">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+          </svg>
+          Products
+        </a>
+        <a href="inventory.html" class="admin-nav-link active">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+          </svg>
+          Inventory
+        </a>
+        <a href="categories.html" class="admin-nav-link">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+          </svg>
+          Categories
+        </a>
+        <a href="settings.html" class="admin-nav-link">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+          Settings
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="sidebar-logout-btn" onclick="AuthService.logout()">
+          <svg style="width: 18px; height: 18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+          </svg>
+          LOGOUT
+        </button>
+      </div>
+    </aside>
+
+    <div class="admin-backdrop-overlay" id="adminBackdrop"></div>
+
+    <!-- Main Content -->
+    <div class="admin-main">
+      
+      <!-- Topbar -->
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button class="sidebar-toggle-btn" id="adminSidebarToggle" aria-label="Toggle navigation">
+            <svg style="width: 24px; height: 24px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+          <h2 class="topbar-title">INVENTORY MATRIX</h2>
+        </div>
+
+        <div class="topbar-right">
+          <span style="font-size: 0.813rem; color: var(--admin-gray-500);">Quick Inline Stock Adjustment</span>
+        </div>
+      </header>
+
+      <main class="admin-content">
+        
+        <!-- Search & Filter bar -->
+        <div class="admin-card" style="margin-bottom: 1.5rem;">
+          <div class="admin-card-body" style="padding: 1.25rem;">
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <input type="text" id="inventorySearchInput" class="form-input" style="flex: 1; min-width: 240px;" placeholder="Search inventory by product name or ID..." oninput="handleInventoryFilter()">
+              <select id="inventoryCategoryFilter" class="form-select" style="width: auto; min-width: 150px;" onchange="handleInventoryFilter()">
+                <option value="all">All Categories</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inventory Grid Card -->
+        <section class="admin-card">
+          <div class="admin-card-header">
+            <h3 class="admin-card-title">SIZE-WISE STOCK BREAKDOWN</h3>
+            <span style="font-size: 0.75rem; color: var(--admin-gray-500);">Changes auto-save immediately</span>
+          </div>
+
+          <div class="admin-table-wrapper">
+            <table class="admin-table mobile-card-table">
+              <thead>
+                <tr>
+                  <th>PRODUCT</th>
+                  <th>XS</th>
+                  <th>S</th>
+                  <th>M</th>
+                  <th>L</th>
+                  <th>XL</th>
+                  <th>XXL</th>
+                  <th>TOTAL</th>
+                  <th>STATUS</th>
+                </tr>
+              </thead>
+              <tbody id="inventoryTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+      </main>
+
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/authService.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/categoryService.js"></script>
+  <script src="js/productService.js"></script>
+  <script src="js/inventoryService.js"></script>
+  <script src="js/admin.js"></script>
+  <script>
+    let inventoryProducts = [];
+    const ALL_SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+
+    async function initInventoryPage() {
+      // 1. Categories
+      const categories = await CategoryService.getCategories();
+      const catSelect = document.getElementById('inventoryCategoryFilter');
+      categories.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c.name;
+        opt.textContent = c.name;
+        catSelect.appendChild(opt);
+      });
+
+      // 2. Products
+      inventoryProducts = await ProductService.getProducts();
+      renderInventoryTable(inventoryProducts);
+    }
+
+    function renderInventoryTable(products) {
+      const tbody = document.getElementById('inventoryTableBody');
+
+      tbody.innerHTML = products.map(p => {
+        const totalStock = ProductService.calculateTotalStock(p);
+        const stockStatus = ProductService.getStockStatus(totalStock);
+        
+        let stockBadgeClass = 'badge-in-stock';
+        if (totalStock === 0) stockBadgeClass = 'badge-out-stock';
+        else if (totalStock <= 5) stockBadgeClass = 'badge-low-stock';
+
+        const sizeCols = ALL_SIZES.map(sz => {
+          const isOffered = p.sizes && p.sizes.includes(sz);
+          if (!isOffered) {
+            return `<td data-label="${sz}"><span style="color: var(--admin-gray-300); font-size: 0.813rem;">—</span></td>`;
+          }
+
+          const currentQty = p.stock ? (p.stock[sz] || 0) : 0;
+          return `
+            <td data-label="${sz}">
+              <div class="qty-stepper-admin" style="height: 30px;">
+                <button type="button" onclick="adjustQuickStock('${p.id}', '${sz}', -1)" style="width: 24px; font-size: 0.8rem;">-</button>
+                <input type="number" id="stock_${p.id}_${sz}" value="${currentQty}" min="0" style="width: 36px; font-size: 0.813rem;" onchange="setDirectQuickStock('${p.id}', '${sz}', this)">
+                <button type="button" onclick="adjustQuickStock('${p.id}', '${sz}', 1)" style="width: 24px; font-size: 0.8rem;">+</button>
+              </div>
+            </td>
+          `;
+        }).join('');
+
+        return `
+          <tr id="row_${p.id}">
+            <td class="table-product-cell" data-label="Product">
+              <img src="${p.images[0] || '../images/logo/logo.png'}" alt="${p.name}" class="table-thumb">
+              <div>
+                <div class="table-product-name">${p.name}</div>
+                <div class="table-product-id">${p.id} • ${p.category}</div>
+              </div>
+            </td>
+            ${sizeCols}
+            <td data-label="Total">
+              <strong id="total_${p.id}" style="font-size: 1rem;">${totalStock}</strong>
+            </td>
+            <td data-label="Status">
+              <span id="badge_${p.id}" class="admin-badge ${stockBadgeClass}">${stockStatus}</span>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    async function adjustQuickStock(productId, size, delta) {
+      const input = document.getElementById(`stock_${productId}_${size}`);
+      if (!input) return;
+
+      const current = parseInt(input.value, 10) || 0;
+      const next = Math.max(0, current + delta);
+      input.value = next;
+
+      const res = await InventoryService.updateSizeStock(productId, size, next);
+      if (res.success) {
+        // Update total and badge in row
+        const totalEl = document.getElementById(`total_${productId}`);
+        const badgeEl = document.getElementById(`badge_${productId}`);
+        if (totalEl) totalEl.textContent = res.totalStock;
+        if (badgeEl) {
+          badgeEl.textContent = res.stockStatus;
+          badgeEl.className = `admin-badge ${res.totalStock === 0 ? 'badge-out-stock' : res.totalStock <= 5 ? 'badge-low-stock' : 'badge-in-stock'}`;
+        }
+        adminToast(`Updated ${productId} Size ${size} to ${next} units.`, 'success');
+      }
+    }
+
+    async function setDirectQuickStock(productId, size, inputEl) {
+      const val = Math.max(0, parseInt(inputEl.value, 10) || 0);
+      inputEl.value = val;
+
+      const res = await InventoryService.updateSizeStock(productId, size, val);
+      if (res.success) {
+        const totalEl = document.getElementById(`total_${productId}`);
+        const badgeEl = document.getElementById(`badge_${productId}`);
+        if (totalEl) totalEl.textContent = res.totalStock;
+        if (badgeEl) {
+          badgeEl.textContent = res.stockStatus;
+          badgeEl.className = `admin-badge ${res.totalStock === 0 ? 'badge-out-stock' : res.totalStock <= 5 ? 'badge-low-stock' : 'badge-in-stock'}`;
+        }
+        adminToast(`Updated ${productId} Size ${size} to ${val} units.`, 'success');
+      }
+    }
+
+    function handleInventoryFilter() {
+      const q = document.getElementById('inventorySearchInput').value.trim().toLowerCase();
+      const cat = document.getElementById('inventoryCategoryFilter').value;
+
+      const filtered = inventoryProducts.filter(p => {
+        if (q && !p.name.toLowerCase().includes(q) && !p.id.toLowerCase().includes(q)) return false;
+        if (cat !== 'all' && p.category !== cat) return false;
+        return true;
+      });
+
+      renderInventoryTable(filtered);
+    }
+
+    document.addEventListener('DOMContentLoaded', initInventoryPage);
+  </script>
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | MANUSDRIP Admin</title>
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="icon" type="image/png" href="../images/logo/logo.png">
+</head>
+<body>
+
+  <div class="admin-wrapper">
+    
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-header">
+        <img src="../images/logo/logo-white.png" alt="ManusDrip Logo" class="sidebar-logo">
+        <span class="sidebar-badge">ADMIN</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="admin-nav-link active">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+          </svg>
+          Dashboard
+        </a>
+        <a href="products.html" class="admin-nav-link">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+          </svg>
+          Products
+        </a>
+        <a href="inventory.html" class="admin-nav-link">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+          </svg>
+          Inventory
+        </a>
+        <a href="categories.html" class="admin-nav-link">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+          </svg>
+          Categories
+        </a>
+        <a href="settings.html" class="admin-nav-link">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+          Settings
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="sidebar-logout-btn" onclick="AuthService.logout()">
+          <svg style="width: 18px; height: 18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+          </svg>
+          LOGOUT
+        </button>
+      </div>
+    </aside>
+
+    <div class="admin-backdrop-overlay" id="adminBackdrop"></div>
+
+    <!-- Main Content Area -->
+    <div class="admin-main">
+      
+      <!-- Topbar -->
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button class="sidebar-toggle-btn" id="adminSidebarToggle" aria-label="Toggle navigation">
+            <svg style="width: 24px; height: 24px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+          <h2 class="topbar-title">DASHBOARD OVERVIEW</h2>
+        </div>
+
+        <div class="topbar-right">
+          <a href="add-product.html" class="admin-btn admin-btn-primary admin-btn-sm">
+            + ADD PRODUCT
+          </a>
+          <div class="user-profile-tag">
+            <div class="user-avatar">MD</div>
+            <span id="adminUserEmail" style="display: none;">admin@manusdrip.com</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Dashboard Content -->
+      <main class="admin-content">
+        
+        <!-- Overview KPI Metric Cards -->
+        <div class="metrics-grid">
+          
+          <div class="metric-card">
+            <div class="metric-card-label">TOTAL PRODUCTS</div>
+            <div class="metric-card-value" id="metricTotalProducts">--</div>
+          </div>
+
+          <div class="metric-card metric-success">
+            <div class="metric-card-label">ACTIVE PRODUCTS</div>
+            <div class="metric-card-value" id="metricActiveProducts">--</div>
+          </div>
+
+          <div class="metric-card metric-warning">
+            <div class="metric-card-label">LOW STOCK</div>
+            <div class="metric-card-value" id="metricLowStock">--</div>
+          </div>
+
+          <div class="metric-card metric-highlight">
+            <div class="metric-card-label">OUT OF STOCK</div>
+            <div class="metric-card-value" id="metricOutOfStock">--</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-card-label">TOTAL STOCK UNITS</div>
+            <div class="metric-card-value" id="metricTotalStock">--</div>
+          </div>
+
+        </div>
+
+        <!-- Section 1: Low Stock Attention Alert -->
+        <section class="admin-card" id="lowStockCard" style="display: none;">
+          <div class="admin-card-header" style="background-color: var(--admin-red-light);">
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <svg style="width: 20px; height: 20px; color: var(--admin-red);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+              </svg>
+              <h3 class="admin-card-title" style="color: var(--admin-red);">LOW STOCK PRODUCTS (NEEDS ATTENTION)</h3>
+            </div>
+            <a href="inventory.html" class="admin-btn admin-btn-secondary admin-btn-sm">MANAGE INVENTORY</a>
+          </div>
+          <div class="admin-table-wrapper">
+            <table class="admin-table mobile-card-table">
+              <thead>
+                <tr>
+                  <th>PRODUCT</th>
+                  <th>CATEGORY</th>
+                  <th>PRICE</th>
+                  <th>STOCK REMAINING</th>
+                  <th>STATUS</th>
+                  <th>ACTION</th>
+                </tr>
+              </thead>
+              <tbody id="lowStockTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Section 2: Recent Products -->
+        <section class="admin-card">
+          <div class="admin-card-header">
+            <h3 class="admin-card-title">RECENT PRODUCTS</h3>
+            <a href="products.html" class="admin-btn admin-btn-secondary admin-btn-sm">VIEW ALL PRODUCTS</a>
+          </div>
+          <div class="admin-table-wrapper">
+            <table class="admin-table mobile-card-table">
+              <thead>
+                <tr>
+                  <th>PRODUCT</th>
+                  <th>CATEGORY</th>
+                  <th>PRICE</th>
+                  <th>STOCK</th>
+                  <th>STATUS</th>
+                  <th>ACTIONS</th>
+                </tr>
+              </thead>
+              <tbody id="recentProductsTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+      </main>
+
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/authService.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/categoryService.js"></script>
+  <script src="js/productService.js"></script>
+  <script src="js/inventoryService.js"></script>
+  <script src="js/admin.js"></script>
+  <script>
+    async function loadDashboard() {
+      // 1. Fetch Metrics
+      const metrics = await InventoryService.getDashboardMetrics();
+      document.getElementById('metricTotalProducts').textContent = metrics.totalProducts;
+      document.getElementById('metricActiveProducts').textContent = metrics.activeProducts;
+      document.getElementById('metricLowStock').textContent = metrics.lowStockCount;
+      document.getElementById('metricOutOfStock').textContent = metrics.outOfStockCount;
+      document.getElementById('metricTotalStock').textContent = metrics.totalUnits.toLocaleString();
+
+      // 2. Fetch Low Stock
+      const lowStockProducts = await InventoryService.getLowStockProducts();
+      const lowStockCard = document.getElementById('lowStockCard');
+      const lowStockTbody = document.getElementById('lowStockTableBody');
+
+      if (lowStockProducts.length > 0) {
+        lowStockCard.style.display = 'block';
+        lowStockTbody.innerHTML = lowStockProducts.map(p => {
+          const totalStock = ProductService.calculateTotalStock(p);
+          const stockStatus = ProductService.getStockStatus(totalStock);
+          const badgeClass = totalStock === 0 ? 'badge-out-stock' : 'badge-low-stock';
+
+          return `
+            <tr>
+              <td class="table-product-cell" data-label="Product">
+                <img src="${p.images[0] || '../images/logo/logo.png'}" alt="${p.name}" class="table-thumb">
+                <div>
+                  <div class="table-product-name">${p.name}</div>
+                  <div class="table-product-id">${p.id}</div>
+                </div>
+              </td>
+              <td data-label="Category">${p.category}</td>
+              <td data-label="Price">₹${p.price.toLocaleString()}</td>
+              <td data-label="Stock Remaining"><strong>${totalStock} units</strong></td>
+              <td data-label="Status">
+                <span class="admin-badge ${badgeClass}">${stockStatus}</span>
+              </td>
+              <td data-label="Action">
+                <a href="inventory.html" class="admin-btn admin-btn-secondary admin-btn-sm">RESTOCK</a>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      } else {
+        lowStockCard.style.display = 'none';
+      }
+
+      // 3. Fetch Recent Products (first 5)
+      const allProducts = await ProductService.getProducts();
+      const recentTbody = document.getElementById('recentProductsTableBody');
+
+      recentTbody.innerHTML = allProducts.slice(0, 5).map(p => {
+        const totalStock = ProductService.calculateTotalStock(p);
+        const statusBadgeClass = `badge-${p.status}`;
+
+        return `
+          <tr>
+            <td class="table-product-cell" data-label="Product">
+              <img src="${p.images[0] || '../images/logo/logo.png'}" alt="${p.name}" class="table-thumb">
+              <div>
+                <div class="table-product-name">${p.name}</div>
+                <div class="table-product-id">${p.id}</div>
+              </div>
+            </td>
+            <td data-label="Category">${p.category}</td>
+            <td data-label="Price">₹${p.price.toLocaleString()}</td>
+            <td data-label="Stock">${totalStock} units</td>
+            <td data-label="Status">
+              <span class="admin-badge ${statusBadgeClass}">${p.status.replace('_', ' ')}</span>
+            </td>
+            <td data-label="Actions">
+              <div class="table-actions">
+                <a href="edit-product.html?id=${p.id}" class="admin-btn admin-btn-secondary admin-btn-sm">EDIT</a>
+                <a href="inventory.html" class="admin-btn admin-btn-secondary admin-btn-sm">STOCK</a>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', loadDashboard);
+  </script>
+</body>
+</html>

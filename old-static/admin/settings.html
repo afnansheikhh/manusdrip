@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings | ManusDrip Owner Panel</title>
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="icon" type="image/png" href="../images/logo/logo.png">
+</head>
+<body>
+
+  <div class="admin-wrapper">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-header">
+        <img src="../images/logo/logo-white.png" alt="ManusDrip Logo" class="sidebar-logo">
+        <span class="sidebar-badge">ADMIN</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="admin-nav-link">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+          </svg>
+          Dashboard
+        </a>
+        <a href="products.html" class="admin-nav-link">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+          </svg>
+          Products
+        </a>
+        <a href="inventory.html" class="admin-nav-link">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+          </svg>
+          Inventory
+        </a>
+        <a href="categories.html" class="admin-nav-link">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+          </svg>
+          Categories
+        </a>
+        <a href="settings.html" class="admin-nav-link active">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+          Settings
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="sidebar-logout-btn" onclick="AuthService.logout()">
+          <svg style="width: 18px; height: 18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+          </svg>
+          LOGOUT
+        </button>
+      </div>
+    </aside>
+
+    <div class="admin-backdrop-overlay" id="adminBackdrop"></div>
+
+    <!-- Main Content -->
+    <div class="admin-main">
+      
+      <!-- Topbar -->
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button class="sidebar-toggle-btn" id="adminSidebarToggle" aria-label="Toggle navigation">
+            <svg style="width: 24px; height: 24px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+          <h2 class="topbar-title">STORE CONFIGURATION & CLOUD SETTINGS</h2>
+        </div>
+      </header>
+
+      <main class="admin-content" style="max-width: 900px;">
+        
+        <!-- 1. GOOGLE APPS SCRIPT / CLOUD INTEGRATION -->
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3 class="admin-card-title">GOOGLE SHEETS & DRIVE INTEGRATION</h3>
+            <span id="cloudStatusBadge" class="admin-badge badge-draft">LOCAL / UNCONFIGURED</span>
+          </div>
+          <div class="admin-card-body">
+            <form id="cloudConfigForm" onsubmit="handleSaveCloudConfig(event)">
+              
+              <div class="form-group">
+                <label class="form-label" for="cloudApiUrl">GOOGLE APPS SCRIPT WEB APP URL *</label>
+                <input type="url" id="cloudApiUrl" class="form-input" value="https://script.google.com/macros/s/AKfycbz1AZ8yT3Rpjs7TFMVAezME9yxRuTgopdcu5Cpj8Z8-jKen48OULcIP4LBtax0XszSi6g/exec" placeholder="https://script.google.com/macros/s/AKfycb.../exec">
+                <small style="color: var(--admin-gray-500); font-size: 0.75rem; display: block; margin-top: 0.35rem;">
+                  Paste the Web App URL generated when deploying Code.gs in Google Apps Script.
+                </small>
+              </div>
+
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label" for="spreadsheetId">GOOGLE SPREADSHEET ID</label>
+                  <input type="text" id="spreadsheetId" class="form-input" placeholder="e.g. 1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms">
+                  <small style="color: var(--admin-gray-500); font-size: 0.75rem; display: block; margin-top: 0.35rem;">
+                    From your Google Sheet URL: <code>docs.google.com/spreadsheets/d/<b>ID</b>/edit</code>
+                  </small>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="driveFolderId">GOOGLE DRIVE PRODUCT IMAGES FOLDER ID</label>
+                  <input type="text" id="driveFolderId" class="form-input" placeholder="e.g. 1a2b3c4d5e6f7g8h9i0j">
+                  <small style="color: var(--admin-gray-500); font-size: 0.75rem; display: block; margin-top: 0.35rem;">
+                    From your Drive folder URL: <code>drive.google.com/drive/folders/<b>ID</b></code>
+                  </small>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem;">
+                <button type="submit" class="admin-btn admin-btn-primary" id="saveCloudBtn">
+                  SAVE CONFIGURATION
+                </button>
+                <button type="button" class="admin-btn admin-btn-secondary" onclick="handleTestCloudConnection()" id="testConnectionBtn">
+                  TEST CONNECTION
+                </button>
+                <button type="button" class="admin-btn admin-btn-secondary" onclick="handleInitDatabase()" id="initDbBtn" style="border-color: var(--admin-primary);">
+                  INITIALIZE GOOGLE SHEETS & DRIVE
+                </button>
+              </div>
+
+              <div id="initStatusNotice" style="display: none; margin-top: 1.25rem; padding: 1rem; border-radius: var(--radius-sm); font-size: 0.875rem; font-weight: 600;"></div>
+
+            </form>
+          </div>
+        </div>
+
+        <!-- 2. STORE LAUNCH MODE (COMING SOON vs LIVE) -->
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3 class="admin-card-title">WEBSITE LAUNCH STATUS</h3>
+            <span id="launchStatusBadge" class="admin-badge badge-active">COMING SOON</span>
+          </div>
+          <div class="admin-card-body">
+            <form onsubmit="handleSaveLaunchMode(event)">
+              <div class="form-group">
+                <label class="form-label" for="storeLaunchMode">CURRENT MODE</label>
+                <select id="storeLaunchMode" class="form-select" onchange="updateLaunchBadge(this.value)">
+                  <option value="COMING_SOON">COMING_SOON — Display high-fashion Coming Soon & Countdown experience</option>
+                  <option value="LIVE">LIVE — Display active product catalog and live ordering</option>
+                </select>
+                <small style="color: var(--admin-gray-500); font-size: 0.75rem; display: block; margin-top: 0.35rem;">
+                  Controls what visitors see when they browse the customer website without editing any code.
+                </small>
+              </div>
+
+              <button type="submit" class="admin-btn admin-btn-primary" style="margin-top: 0.5rem;">
+                UPDATE LAUNCH STATUS
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- 3. WHATSAPP ORDERING CONFIGURATION -->
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3 class="admin-card-title">WHATSAPP NUMBER & ORDERING</h3>
+          </div>
+          <div class="admin-card-body">
+            <form onsubmit="handleSaveWhatsAppNumber(event)">
+              <div class="form-group">
+                <label class="form-label" for="storeWhatsAppNumber">STORE WHATSAPP NUMBER (WITH COUNTRY CODE) *</label>
+                <input type="text" id="storeWhatsAppNumber" class="form-input" placeholder="e.g. 916366691845 or +91 63666 91845" required>
+                <small style="color: var(--admin-gray-500); font-size: 0.75rem; display: block; margin-top: 0.35rem;">
+                  All customer inquiry and purchase buttons route directly to this WhatsApp number.
+                </small>
+              </div>
+
+              <div style="display: flex; gap: 0.75rem; margin-top: 1rem; flex-wrap: wrap;">
+                <button type="submit" class="admin-btn admin-btn-primary">SAVE WHATSAPP NUMBER</button>
+                <button type="button" class="admin-btn admin-btn-secondary" onclick="testStoreWhatsApp()">TEST WHATSAPP LINK</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- 4. STORE PROFILE & SOCIAL DETAILS -->
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3 class="admin-card-title">STORE IDENTITY & SOCIAL</h3>
+          </div>
+          <div class="admin-card-body">
+            <form onsubmit="handleSaveStoreDetails(event)">
+              <div class="form-grid">
+                
+                <div class="form-group">
+                  <label class="form-label" for="storeName">BRAND / STORE NAME</label>
+                  <input type="text" id="storeName" class="form-input" value="ManusDrip">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="storeCity">CITY / LOCATION</label>
+                  <input type="text" id="storeCity" class="form-input" value="Hospet, Karnataka">
+                </div>
+
+                <div class="form-group form-grid-full">
+                  <label class="form-label" for="storeAddress">STORE ADDRESS / PICKUP POINT</label>
+                  <input type="text" id="storeAddress" class="form-input" value="Hospet, Karnataka, India">
+                </div>
+
+                <div class="form-group form-grid-full">
+                  <label class="form-label" for="instagramUrl">INSTAGRAM URL</label>
+                  <input type="url" id="instagramUrl" class="form-input" value="https://www.instagram.com/crushb0yy_?igsh=MXN3aXp3eTJtbXB1dg==">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="lowStockThreshold">LOW STOCK THRESHOLD</label>
+                  <input type="number" id="lowStockThreshold" class="form-input" value="5" min="1">
+                </div>
+
+              </div>
+
+              <div style="margin-top: 1rem;">
+                <button type="submit" class="admin-btn admin-btn-primary">SAVE STORE DETAILS</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- 5. ADMIN PASSWORD UPDATE -->
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3 class="admin-card-title">CHANGE ADMIN PASSWORD</h3>
+          </div>
+          <div class="admin-card-body">
+            <form onsubmit="handleChangeAdminPassword(event)">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label" for="newAdminPassword">NEW ADMIN PASSWORD</label>
+                  <input type="password" id="newAdminPassword" class="form-input" placeholder="Enter new password" required minlength="4">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="confirmAdminPassword">CONFIRM PASSWORD</label>
+                  <input type="password" id="confirmAdminPassword" class="form-input" placeholder="Re-enter password" required minlength="4">
+                </div>
+              </div>
+              <button type="submit" class="admin-btn admin-btn-secondary" style="margin-top: 0.75rem;">
+                UPDATE PASSWORD
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </main>
+
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="../js/config.js"></script>
+  <script src="js/authService.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/categoryService.js"></script>
+  <script src="js/productService.js"></script>
+  <script src="js/admin.js"></script>
+  <script>
+    AuthService.requireAuth();
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadSettingsUI();
+    });
+
+    function loadSettingsUI() {
+      // 1. Cloud Config
+      const activeUrl = 'https://script.google.com/macros/s/AKfycbyx5XM2-YXotaVZqRmby1pH_oCmrEBxCHf_SfwJZRLW3xMQBUwPmuxn8tfDMp20U5fl/exec';
+      const url = localStorage.getItem('manusdrip_admin_api_url') || activeUrl;
+      const statusBadge = document.getElementById('cloudStatusBadge');
+
+      if (url) {
+        document.getElementById('cloudApiUrl').value = url;
+        statusBadge.textContent = 'CONFIGURED';
+        statusBadge.className = 'admin-badge badge-active';
+      }
+
+      const savedSheetId = localStorage.getItem('manusdrip_spreadsheet_id') || '';
+      const savedDriveId = localStorage.getItem('manusdrip_drive_folder_id') || '';
+      if (savedSheetId) document.getElementById('spreadsheetId').value = savedSheetId;
+      if (savedDriveId) document.getElementById('driveFolderId').value = savedDriveId;
+
+      // 2. Launch Mode
+      const currentMode = window.StoreConfig ? StoreConfig.STORE_LAUNCH_MODE : 'COMING_SOON';
+      const launchSelect = document.getElementById('storeLaunchMode');
+      if (launchSelect) {
+        launchSelect.value = currentMode;
+        updateLaunchBadge(currentMode);
+      }
+
+      // 3. WhatsApp Number
+      const whatsappInput = document.getElementById('storeWhatsAppNumber');
+      if (whatsappInput && window.StoreConfig) {
+        whatsappInput.value = StoreConfig.getWhatsAppNumber();
+      }
+
+      // 4. Store details from storage if present
+      const savedAddress = localStorage.getItem('manusdrip_store_address');
+      const savedInstagram = localStorage.getItem('manusdrip_instagram_url');
+      const savedThreshold = localStorage.getItem('manusdrip_low_stock_threshold');
+      if (savedAddress) document.getElementById('storeAddress').value = savedAddress;
+      if (savedInstagram) document.getElementById('instagramUrl').value = savedInstagram;
+      if (savedThreshold) document.getElementById('lowStockThreshold').value = savedThreshold;
+    }
+
+    function updateLaunchBadge(mode) {
+      const badge = document.getElementById('launchStatusBadge');
+      if (!badge) return;
+      if (mode === 'LIVE') {
+        badge.textContent = 'LIVE STORE';
+        badge.className = 'admin-badge badge-active';
+      } else {
+        badge.textContent = 'COMING SOON';
+        badge.className = 'admin-badge badge-draft';
+      }
+    }
+
+    function handleSaveCloudConfig(e) {
+      e.preventDefault();
+      const url = document.getElementById('cloudApiUrl').value.trim();
+      const sheetId = document.getElementById('spreadsheetId').value.trim();
+      const driveId = document.getElementById('driveFolderId').value.trim();
+
+      if (!url) {
+        adminToast('Please enter your Google Apps Script Web App URL.', 'error');
+        return;
+      }
+
+      AdminAPI.setApiConfig(url);
+      if (sheetId) localStorage.setItem('manusdrip_spreadsheet_id', sheetId);
+      if (driveId) localStorage.setItem('manusdrip_drive_folder_id', driveId);
+
+      const statusBadge = document.getElementById('cloudStatusBadge');
+      statusBadge.textContent = 'CONFIGURED';
+      statusBadge.className = 'admin-badge badge-active';
+
+      adminToast('Google Apps Script configuration saved successfully!', 'success');
+    }
+
+    async function handleTestCloudConnection() {
+      const btn = document.getElementById('testConnectionBtn');
+      btn.disabled = true;
+      btn.textContent = 'TESTING...';
+
+      try {
+        const res = await AdminAPI.testConnection();
+        if (res.success) {
+          adminToast('✓ Google Apps Script connection successful!', 'success');
+        } else {
+          adminToast(`Connection error: ${res.error || 'Unknown error'}`, 'error');
+        }
+      } catch (err) {
+        adminToast(`Connection failed: ${err.message}`, 'error');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'TEST CONNECTION';
+      }
+    }
+
+    async function handleInitDatabase() {
+      const btn = document.getElementById('initDbBtn');
+      const notice = document.getElementById('initStatusNotice');
+      
+      btn.disabled = true;
+      btn.textContent = 'INITIALIZING...';
+      notice.style.display = 'none';
+
+      try {
+        const res = await AdminAPI.initDatabase();
+        if (res.success) {
+          notice.style.display = 'block';
+          notice.style.backgroundColor = '#ECFDF5';
+          notice.style.border = '1px solid #10B981';
+          notice.style.color = '#065F46';
+          notice.innerHTML = `<strong>✓ INITIALIZATION SUCCESSFUL</strong><br>${res.message || 'Database sheets and Drive folders ready.'}`;
+          adminToast('Database initialized successfully!', 'success');
+        } else {
+          throw new Error(res.error || 'Failed to initialize database');
+        }
+      } catch (err) {
+        notice.style.display = 'block';
+        notice.style.backgroundColor = '#FEF2F2';
+        notice.style.border = '1px solid #EF4444';
+        notice.style.color = '#991B1B';
+        notice.innerHTML = `<strong>✕ INITIALIZATION FAILED</strong><br>${err.message}`;
+        adminToast(`Initialization failed: ${err.message}`, 'error');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'INITIALIZE GOOGLE SHEETS & DRIVE';
+      }
+    }
+
+    function handleSaveLaunchMode(e) {
+      e.preventDefault();
+      const mode = document.getElementById('storeLaunchMode').value;
+      if (window.StoreConfig) {
+        StoreConfig.STORE_LAUNCH_MODE = mode;
+        localStorage.setItem('manusdrip_launch_mode', mode);
+      }
+      updateLaunchBadge(mode);
+      adminToast(`Website launch status updated to: ${mode}`, 'success');
+    }
+
+    function handleSaveWhatsAppNumber(e) {
+      e.preventDefault();
+      const val = document.getElementById('storeWhatsAppNumber').value.trim();
+      if (!val) {
+        adminToast('Please enter a valid WhatsApp phone number.', 'error');
+        return;
+      }
+      if (window.StoreConfig) {
+        StoreConfig.setWhatsAppNumber(val);
+      }
+      adminToast(`WhatsApp number saved: +${val.replace(/\D/g, '')}`, 'success');
+    }
+
+    function testStoreWhatsApp() {
+      const number = window.StoreConfig ? StoreConfig.getWhatsAppNumber() : '916366691845';
+      const msg = encodeURIComponent('Hi ManusDrip! This is a test message from the Admin Panel.');
+      window.open(`https://wa.me/${number}?text=${msg}`, '_blank');
+    }
+
+    function handleSaveStoreDetails(e) {
+      e.preventDefault();
+      const address = document.getElementById('storeAddress').value.trim();
+      const insta = document.getElementById('instagramUrl').value.trim();
+      const threshold = document.getElementById('lowStockThreshold').value.trim();
+
+      if (address) localStorage.setItem('manusdrip_store_address', address);
+      if (insta) localStorage.setItem('manusdrip_instagram_url', insta);
+      if (threshold) localStorage.setItem('manusdrip_low_stock_threshold', threshold);
+
+      adminToast('Store details and preferences saved.', 'success');
+    }
+
+    async function handleChangeAdminPassword(e) {
+      e.preventDefault();
+      const p1 = document.getElementById('newAdminPassword').value;
+      const p2 = document.getElementById('confirmAdminPassword').value;
+
+      if (p1 !== p2) {
+        adminToast('Passwords do not match.', 'error');
+        return;
+      }
+
+      if (p1.length < 4) {
+        adminToast('Password must be at least 4 characters long.', 'error');
+        return;
+      }
+
+      try {
+        if (AdminAPI.isConfigured()) {
+          await AdminAPI.postAction('UPDATE_SETTINGS', { admin_password: p1 });
+        }
+        localStorage.setItem('manusdrip_admin_password_custom', p1);
+        adminToast('Admin password updated successfully!', 'success');
+        document.getElementById('newAdminPassword').value = '';
+        document.getElementById('confirmAdminPassword').value = '';
+      } catch (err) {
+        adminToast(`Failed to update password: ${err.message}`, 'error');
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Portal | ManusDrip Owner Panel</title>
+  <script src="js/authService.js"></script>
+  <script>
+    if (AuthService.isAuthenticated()) {
+      window.location.replace('dashboard.html');
+    } else {
+      window.location.replace('login.html');
+    }
+  </script>
+</head>
+<body>
+  <p style="text-align: center; margin-top: 2rem; font-family: sans-serif; color: #666;">
+    Redirecting to ManusDrip Management Panel...
+  </p>
+</body>
+</html>
