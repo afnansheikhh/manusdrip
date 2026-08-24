@@ -11,6 +11,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const router = useRouter();
   const { settings } = useStore();
   const [authorized, setAuthorized] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     // Skip auth check only on login page
@@ -30,6 +31,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
     checkAuth();
   }, [pathname, router]);
+
+  // Auto-close sidebar on route change
+  useEffect(() => {
+    setSidebarOpen(false);
+  }, [pathname]);
 
   if (!authorized) {
     return (
@@ -52,7 +58,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   return (
     <div className="admin-wrapper">
       {/* Admin Sidebar Navigation */}
-      <aside className="admin-sidebar">
+      <aside className={`admin-sidebar ${sidebarOpen ? "open" : ""}`}>
         <div className="sidebar-header">
           <Link href="/admin/dashboard" style={{ display: "flex", alignItems: "center", gap: "0.75rem", textDecoration: "none" }}>
             <img src="/images/logo/logo-white.png" alt="ManusDrip Logo" className="sidebar-logo" width="130" height="32" />
@@ -103,11 +109,31 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </div>
       </aside>
 
+      {/* Backdrop overlay for mobile menu */}
+      {sidebarOpen && (
+        <div 
+          className="admin-backdrop-overlay" 
+          onClick={() => setSidebarOpen(false)}
+          style={{ display: "block", opacity: 0.5, visibility: "visible" }}
+        />
+      )}
+
       {/* Main Admin Workspace */}
       <div className="admin-main">
         {/* Topbar */}
         <header className="admin-topbar">
-          <div className="topbar-left">
+          <div className="topbar-left" style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+            <button 
+              type="button" 
+              className="sidebar-toggle-btn" 
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+              aria-label="Toggle navigation"
+              style={{ display: "block", background: "none", border: "none", cursor: "pointer", padding: 0 }}
+            >
+              <svg style={{ width: "24px", height: "24px", color: "var(--admin-black)" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"/>
+              </svg>
+            </button>
             <h2 className="topbar-title">DASHBOARD</h2>
           </div>
           <div className="topbar-right">
