@@ -62,7 +62,7 @@ const DEFAULT_SETTINGS: StoreConfig = {
   store_name: "ManusDrip (Local Demo)",
   city: "Hospet",
   whatsapp_number: "916366691845",
-  store_address: "Hospet showroom showroom, Karnataka, India",
+  store_address: "Vijay Talkies, near Main Bazar, Hospet, Karnataka, India",
   instagram_url: "https://www.instagram.com/crushb0yy_?igsh=MXN3aXp3eTJtbXB1dg==",
   launch_mode: "LIVE",
   low_stock_threshold: 5,

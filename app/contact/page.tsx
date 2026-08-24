@@ -6,8 +6,8 @@ export default function Contact() {
   const { settings } = useStore();
 
   const whatsappNumber = settings?.whatsapp_number || "916366691845";
-  const address = settings?.store_address || "Hospet, Karnataka, India";
-  const mapsUrl = "https://maps.google.com/?q=Hospet+Karnataka+India";
+  const address = settings?.store_address || "Vijay Talkies, near Main Bazar, Hospet, Karnataka, India";
+  const mapsUrl = "https://maps.google.com/?q=Vijay+Talkies+Hospet+Karnataka+India";
 
   return (
     <main style={{ marginTop: "120px", marginBottom: "5rem" }}>
