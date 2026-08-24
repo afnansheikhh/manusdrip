@@ -100,13 +100,6 @@ export default function Header() {
               </svg>
             </button>
 
-            {/* About */}
-            <Link href="/about" className="action-btn" aria-label="About ManusDrip">
-              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ width: "24px", height: "24px" }}>
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
-            </Link>
-
             {/* Wishlist */}
             <Link href="/wishlist" className="action-btn" aria-label="View Wishlist" style={{ position: "relative" }}>
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ width: "24px", height: "24px" }}>
