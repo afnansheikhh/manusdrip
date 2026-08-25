@@ -110,8 +110,11 @@ export default function Drawers() {
               <span className="label">SUBTOTAL</span>
               <span className="value" id="cartDrawerSubtotal">₹{subtotal.toLocaleString()}</span>
             </div>
-            <p className="cart-checkout-notice">
+            <p className="cart-checkout-notice" style={{ marginBottom: "0.25rem" }}>
               Direct self-collection in Hospet. Direct WhatsApp order routing.
+            </p>
+            <p style={{ fontSize: "0.7rem", color: "#6b7280", margin: "0 0 1rem", lineHeight: 1.4, textAlign: "center" }}>
+              💡 <em>Direct links to each product details and photos are included in the message. You can also send screenshots!</em>
             </p>
             <button 
               type="button" 

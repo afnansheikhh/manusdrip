@@ -164,7 +164,9 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
     const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
 
     const itemsText = cart.map((item, idx) => {
-      return `${idx + 1}. ${item.name}\nSize: ${item.size}\nColor: ${item.color}\nQuantity: ${item.quantity}\nPrice: ₹${item.price.toLocaleString()} each`;
+      const host = typeof window !== "undefined" ? window.location.origin : "https://manusdrip.vercel.app";
+      const productLink = `${host}/product/${item.id}`;
+      return `${idx + 1}. ${item.name}\nSize: ${item.size}\nColor: ${item.color}\nQuantity: ${item.quantity}\nPrice: ₹${item.price.toLocaleString()} each\nProduct Link: ${productLink}`;
     }).join('\n\n');
 
     const message = `Hi ManusDrip! 👋

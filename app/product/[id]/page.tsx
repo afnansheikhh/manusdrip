@@ -60,6 +60,8 @@ export default function ProductDetails() {
   // WhatsApp Message Generation
   const refId = `MD-${product.id}-${selectedSize}`;
   const whatsappNumber = settings?.whatsapp_number || "916366691845";
+  const host = typeof window !== "undefined" ? window.location.origin : "https://manusdrip.vercel.app";
+  const productLink = `${host}/product/${product.id}`;
   const checkoutMsg = `Hi ManusDrip! 👋
 
 I'd like to purchase/collect this item:
@@ -69,6 +71,7 @@ Size: ${selectedSize}
 Color: ${selectedColor}
 Quantity: ${quantity}
 Price: ₹${product.price.toLocaleString()}
+Product Link: ${productLink}
 
 I'm in Hospet and would like to collect it from the store. Please confirm availability. Thanks!`;
   const waUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(checkoutMsg)}`;
@@ -237,6 +240,9 @@ I'm in Hospet and would like to collect it from the store. Please confirm availa
                   >
                     BUY ON WHATSAPP
                   </button>
+                  <p style={{ fontSize: "0.7rem", color: "#6b7280", marginTop: "0.25rem", marginBottom: "0.75rem", lineHeight: 1.4, textAlign: "center" }}>
+                    💡 <em>WhatsApp doesn't support auto-attaching files. A link is included in the message so the store team can see the exact photo, or you can send a screenshot!</em>
+                  </p>
                   <button 
                     type="button" 
                     className="btn btn-outline w-100"
