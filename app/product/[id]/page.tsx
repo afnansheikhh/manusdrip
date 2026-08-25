@@ -25,6 +25,7 @@ export default function ProductDetails() {
         if (!selectedSize && found.sizes?.length > 0) {
           setSelectedSize(found.sizes[0]);
         }
+        setSelectedColor(found.color || "Pitch Black");
       }
     }
   }, [products, id, selectedSize]);

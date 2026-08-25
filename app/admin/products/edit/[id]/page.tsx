@@ -19,6 +19,7 @@ export default function EditProduct() {
   const [price, setPrice] = useState("");
   const [originalPrice, setOriginalPrice] = useState("");
   const [status, setStatus] = useState("active");
+  const [color, setColor] = useState("Pitch Black");
   const [featured, setFeatured] = useState(false);
   const [newArrival, setNewArrival] = useState(false);
   const [bestseller, setBestseller] = useState(false);
@@ -42,6 +43,7 @@ export default function EditProduct() {
         setPrice(String(p.price));
         setOriginalPrice(p.originalPrice ? String(p.originalPrice) : "");
         setStatus(p.status);
+        setColor(p.color || "Pitch Black");
         setFeatured(p.featured || false);
         setNewArrival(p.newArrival || false);
         setBestseller(p.bestseller || false);
@@ -149,6 +151,7 @@ export default function EditProduct() {
       sizes,
       stock,
       status,
+      color: color.trim() || "Pitch Black",
       featured,
       newArrival,
       bestseller
@@ -189,7 +192,7 @@ export default function EditProduct() {
               PRODUCT DETAILS
             </h3>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: "1.5rem", marginBottom: "1.25rem" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr 1fr", gap: "1.5rem", marginBottom: "1.25rem" }}>
               <div>
                 <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 800, marginBottom: "0.5rem", color: "#6b7280" }}>PRODUCT ID (READ-ONLY)</label>
                 <input 
@@ -206,6 +209,17 @@ export default function EditProduct() {
                   placeholder="e.g. Blue Denim Riot Shirt" 
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  style={{ width: "100%", padding: "0.6rem", border: "1px solid #d1d5db" }}
+                  required
+                />
+              </div>
+              <div>
+                <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 800, marginBottom: "0.5rem" }}>COLOR</label>
+                <input 
+                  type="text" 
+                  placeholder="e.g. Pitch Black" 
+                  value={color}
+                  onChange={(e) => setColor(e.target.value)}
                   style={{ width: "100%", padding: "0.6rem", border: "1px solid #d1d5db" }}
                   required
                 />

@@ -28,6 +28,7 @@ export interface Product {
   featured: boolean;
   newArrival: boolean;
   bestseller: boolean;
+  color?: string;
   createdAt?: any;
   updatedAt?: any;
 }
