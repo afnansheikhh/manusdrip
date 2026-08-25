@@ -160,7 +160,8 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
   const checkoutWhatsApp = () => {
     if (cart.length === 0) return;
 
-    const refId = `MD-${Date.now()}`;
+    const productCodes = cart.map(item => `${item.id}-${item.size}`).join(', ');
+    const refId = `MD-${productCodes}`;
     const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
 
     const itemsText = cart.map((item, idx) => {

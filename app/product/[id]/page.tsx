@@ -22,12 +22,12 @@ export default function ProductDetails() {
       const found = products.find(p => p.id === id);
       if (found) {
         setProduct(found);
-        if (found.sizes?.length > 0) {
+        if (!selectedSize && found.sizes?.length > 0) {
           setSelectedSize(found.sizes[0]);
         }
       }
     }
-  }, [products, id]);
+  }, [products, id, selectedSize]);
 
   if (loading) {
     return (
