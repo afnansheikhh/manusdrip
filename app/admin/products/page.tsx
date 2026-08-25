@@ -27,13 +27,12 @@ export default function AdminProductsList() {
     }
   };
 
-  const handleStatusToggle = async (id: string, currentStatus: string) => {
-    const nextStatus = currentStatus === "active" ? "draft" : "active";
-    const ok = await DbService.updateProduct(id, { status: nextStatus });
+  const handleSetStatus = async (id: string, newStatus: string) => {
+    const ok = await DbService.updateProduct(id, { status: newStatus });
     if (ok) {
       refreshCatalog();
     } else {
-      alert("Failed to toggle status.");
+      alert("Failed to update status.");
     }
   };
 
@@ -95,14 +94,9 @@ export default function AdminProductsList() {
                   <td style={{ padding: "1rem" }}>{p.category}</td>
                   <td style={{ padding: "1rem" }}>₹{p.price.toLocaleString()}</td>
                   <td style={{ padding: "1rem" }}>
-                    <button
-                      type="button"
-                      onClick={() => handleStatusToggle(p.id, p.status)}
-                      className={`admin-badge ${p.status === "active" ? "badge-in-stock" : "badge-out-stock"}`}
-                      style={{ border: "none", cursor: "pointer", display: "inline-block" }}
-                    >
-                      {p.status === "active" ? "ACTIVE" : "DRAFT"}
-                    </button>
+                    <span className={`admin-badge badge-${p.status}`}>
+                      {p.status === "sold_out" ? "SOLD OUT" : p.status}
+                    </span>
                   </td>
                   <td style={{ padding: "1rem" }}>
                     <div style={{ display: "flex", gap: "0.75rem", fontFamily: "var(--font-heading)" }}>
@@ -112,10 +106,47 @@ export default function AdminProductsList() {
                       >
                         EDIT
                       </Link>
+
+                      {p.status === "sold_out" ? (
+                        <button
+                          type="button"
+                          onClick={() => handleSetStatus(p.id, "active")}
+                          style={{ background: "none", border: "none", color: "#10b981", textDecoration: "underline", fontWeight: 800, cursor: "pointer", padding: 0 }}
+                        >
+                          ACTIVATE
+                        </button>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={() => handleSetStatus(p.id, "sold_out")}
+                          style={{ background: "none", border: "none", color: "#f59e0b", textDecoration: "underline", fontWeight: 800, cursor: "pointer", padding: 0 }}
+                        >
+                          SOLD OUT
+                        </button>
+                      )}
+
+                      {p.status === "active" ? (
+                        <button
+                          type="button"
+                          onClick={() => handleSetStatus(p.id, "draft")}
+                          style={{ background: "none", border: "none", color: "#6b7280", textDecoration: "underline", fontWeight: 800, cursor: "pointer", padding: 0 }}
+                        >
+                          DRAFT
+                        </button>
+                      ) : p.status === "draft" ? (
+                        <button
+                          type="button"
+                          onClick={() => handleSetStatus(p.id, "active")}
+                          style={{ background: "none", border: "none", color: "#10b981", textDecoration: "underline", fontWeight: 800, cursor: "pointer", padding: 0 }}
+                        >
+                          ACTIVATE
+                        </button>
+                      ) : null}
+
                       <button
                         type="button"
                         onClick={() => handleDelete(p.id)}
-                        style={{ background: "none", border: "none", color: "var(--color-brand-red)", textDecoration: "underline", fontWeight: 800, cursor: "pointer" }}
+                        style={{ background: "none", border: "none", color: "var(--color-brand-red)", textDecoration: "underline", fontWeight: 800, cursor: "pointer", padding: 0 }}
                       >
                         DELETE
                       </button>

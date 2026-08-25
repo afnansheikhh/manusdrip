@@ -222,6 +222,7 @@ export default function AddProduct() {
                   style={{ width: "100%", padding: "0.6rem", border: "1px solid #d1d5db", background: "none" }}
                 >
                   <option value="active">Active (Visible)</option>
+                  <option value="sold_out">Sold Out (Out of Stock)</option>
                   <option value="draft">Draft (Hidden)</option>
                 </select>
               </div>
